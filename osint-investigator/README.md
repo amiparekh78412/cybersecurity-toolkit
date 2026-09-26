@@ -187,11 +187,8 @@ Depending on the version of the application, additional Python packages may be r
 Install the required dependencies using:
 
 ```bash
-pip install -r requirements.txt
+pip install customtkinter
 ```
-
-If the project does not contain a `requirements.txt` file, install the packages mentioned by the application/documentation.
-
 ---
 
 # 🚀 Installation
