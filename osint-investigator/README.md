@@ -1,432 +1,244 @@
 # 🔎 OSINT Investigator
 
-A beginner-friendly **Open Source Intelligence (OSINT) Investigation Dashboard** built with Python.
+> A beginner-friendly Python GUI toolkit for legal, authorized, and publicly sourced Open Source Intelligence (OSINT) research.
 
-This project was created as an educational cybersecurity tool to help students understand how publicly available information can be collected, organized, and documented during an OSINT investigation.
+## About & Ethics
 
-> **⚠️ Educational & Ethical Use Only**
->
-> This tool is intended for authorized security research, cybersecurity education, CTF/lab environments, and investigations involving information that is publicly accessible.
->
-> Do not use this tool to harass, stalk, impersonate, threaten, target, or harm individuals or organizations. Do not use it to bypass authentication, access private information, evade security controls, or perform unauthorized security testing.
->
-> The responsibility for using this software legally and ethically belongs to the user.
+**OSINT Investigator** is a student cybersecurity project designed to help learners understand how publicly available information can be discovered, organized, and documented during an OSINT investigation.
+
+The tool is intended for **educational purposes, authorized security research, cybersecurity labs, and legitimate investigations using publicly accessible information**.
+
+> ⚠️ **Responsible Use:** This application does not bypass authentication, CAPTCHAs, rate limits, or access controls. It does not perform vulnerability scanning, exploitation, or unauthorized access. Always obtain appropriate authorization before investigating a target and respect applicable laws, privacy requirements, and website terms of service.
 
 ---
 
-## 📌 Features
+## ✨ Features
 
-The application provides several OSINT-related modules through a single graphical interface.
+The application provides eight integrated OSINT modules:
 
-### 🔍 1. Google Dork Generator
+* 🔍 **Google Dork Generator** — Generate structured search-engine queries using operators such as `site:`, `filetype:`, `intitle:`, and `inurl:`.
+* 👤 **Username OSINT** — Generate and open public profile URLs for usernames across supported platforms.
+* 📧 **Email OSINT** — Generate public search queries for an email address without attempting account access.
+* 🌐 **Domain OSINT** — Perform basic public domain, DNS, and website information gathering.
+* 🔗 **URL Analysis** — Parse URLs into components such as protocol, domain, port, path, query, and fragment.
+* 📝 **Investigation Notes** — Record observations and notes during an investigation.
+* 📋 **Evidence / Findings** — Organize findings with descriptions, source URLs, queries, timestamps, and notes.
+* 📄 **Report Generator** — Export investigation reports as **TXT or HTML** and save/load investigation data using **JSON**.
 
-Generates search queries using Google search operators for authorized OSINT research.
+### 🖥️ Interface
 
-Examples include:
-
-* `site:`
-* `filetype:`
-* `intitle:`
-* `inurl:`
-* Exact phrase searches
-
-The generated queries can be copied or opened directly in a web browser.
-
----
-
-### 👤 2. Username OSINT
-
-Helps investigate the public presence of a username across selected online platforms.
-
-The tool generates public profile URLs and allows the investigator to open them in a browser.
-
-Example platforms may include:
-
-* GitHub
-* GitLab
-* Reddit
-* X
-* Instagram
-* YouTube
-* Medium
-* Dev.to
-
-The module is intended for checking **publicly accessible profiles only**.
+* Dark cybersecurity-dashboard style
+* Sidebar navigation
+* Integrated investigation workflow
+* Beginner-friendly interface
+* Single-file Python implementation
+* No required third-party dependencies
 
 ---
 
-### 🌐 3. Domain OSINT
+## ⚙️ Requirements
 
-Provides basic information and OSINT utilities for a domain.
-
-Depending on network availability and the target website, the module may provide information such as:
-
-* Domain
-* Website URL
-* Public DNS information
-* Website availability
-* Basic website information
-* Generated search queries
-
-The tool does not perform vulnerability exploitation.
-
----
-
-### 🔗 4. URL Analysis
-
-Analyzes the structure of a URL without attempting to exploit the target.
-
-It can identify components such as:
-
-* Protocol
-* Domain
-* Port
-* Path
-* Query parameters
-* Fragment
-
-Example:
-
-```text
-https://example.com:443/products?id=10#details
-```
-
-The application can break this URL into its individual components for easier analysis.
-
----
-
-### 📝 5. Investigation Notes
-
-Allows investigators to maintain notes during an investigation.
-
-Example:
-
-```text
-Target appears to have several publicly indexed documents.
-```
-
-Notes can help organize observations and investigation progress.
-
----
-
-### 📋 6. Evidence / Findings
-
-The tool allows findings to be recorded during an investigation.
-
-A finding can contain:
-
-* Finding ID
-* Category
-* Description
-* Source URL
-* Search query
-* Date/time
-* Additional notes
-
-This helps convert scattered OSINT observations into organized evidence.
-
----
-
-### 📄 7. Report Generation
-
-Investigation information can be organized into a report containing:
-
-* Investigation target
-* Generated queries
-* Findings
-* Investigation notes
-* Date/time
-* Ethical-use disclaimer
-
-This can be useful for cybersecurity assignments, lab exercises, and authorized investigations.
-
----
-
-# 🖥️ Application Workflow
-
-The general workflow is:
-
-```text
-                 ┌──────────────────┐
-                 │   Enter Target   │
-                 └────────┬─────────┘
-                          │
-                          ▼
-                ┌────────────────────┐
-                │ Select OSINT Module│
-                └─────────┬──────────┘
-                          │
-          ┌───────────────┼────────────────┐
-          ▼               ▼                ▼
-     Google Dork      Username         Domain / URL
-          │               │                │
-          └───────────────┼────────────────┘
-                          ▼
-                 ┌──────────────────┐
-                 │ Record Findings  │
-                 │ & Investigation  │
-                 │      Notes       │
-                 └────────┬─────────┘
-                          │
-                          ▼
-                 ┌──────────────────┐
-                 │ Generate Report  │
-                 └──────────────────┘
-```
-
----
-
-# ⚙️ Requirements
-
-* Python 3.x
-* Internet connection for online OSINT functionality
+* **Python 3.x**
+* Internet connection for modules that access public online resources
 * A modern web browser
 
-Depending on the version of the application, additional Python packages may be required.
+The project is built primarily with the **Python standard library**, so no external packages are required for the core application.
 
-Install the required dependencies using:
+### Optional: CustomTkinter
+
+If you want the enhanced CustomTkinter styling:
 
 ```bash
 pip install customtkinter
 ```
+
+The application can still be used with standard Tkinter where applicable.
+
 ---
 
-# 🚀 Installation
+## 🚀 Installation & Usage
 
-Clone or download this repository.
-
-Then open a terminal in the project directory.
-
-Example:
+### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/your-username/osint-investigator.git
+```
+
+### 2. Enter the project directory
+
+```bash
 cd osint-investigator
 ```
 
-Run the application:
+### 3. Run the application
 
 ```bash
 python osint_investigator.py
 ```
 
----
-
-# 📖 How to Use
-
-## 1. Start the application
-
-Run:
-
-```bash
-python osint_investigator.py
-```
-
-The OSINT Investigator dashboard will open.
+The graphical interface will open and you can begin an authorized OSINT investigation.
 
 ---
 
-## 2. Enter an Investigation Target
+## 🧭 Example Usage
 
-Enter a domain, username, or URL depending on the module you want to use.
+A typical investigation workflow looks like this:
 
-For testing, use domains and accounts that you own or are explicitly authorized to investigate.
+### Step 1 — Set a Target
 
-Example:
+Enter a target appropriate for your authorized investigation.
+
+For example:
 
 ```text
 example.com
 ```
 
----
+For learning and testing, use domains, usernames, or systems that you own or have explicit permission to investigate.
 
-## 3. Select an OSINT Module
+### Step 2 — Generate Google Dorks
 
-Choose one of the available modules:
+Open the **Google Dork Generator** and select the appropriate category.
 
-* Google Dork Generator
-* Username OSINT
-* Domain OSINT
-* URL Analysis
-* Investigation Notes
-* Evidence / Findings
+For example:
 
----
+```text
+site:example.com filetype:pdf
+```
 
-## 4. Review the Results
+The generated query can be copied or opened in a browser.
 
-Review the information generated by the application.
+### Step 3 — Investigate Public Information
 
-Do not assume that every search result is accurate.
+Use the appropriate modules to examine publicly available information.
 
-OSINT information should be verified using reliable sources before being treated as evidence.
+For example:
 
----
+* Analyze a domain
+* Analyze a URL
+* Check public username profiles
+* Review generated search results
 
-## 5. Record Findings
+### Step 4 — Add a Finding
 
-If you identify something relevant, add it to the Findings section.
+When you identify something relevant, record it in **Evidence / Findings**.
 
-Record enough context to explain:
+A finding can contain:
 
-* What was discovered
-* Where it was discovered
-* How it was discovered
-* When it was discovered
+```text
+Category: Public Document
 
----
+Description:
+Publicly indexed document discovered during authorized research.
 
-## 6. Generate a Report
+Source:
+https://example.com/document.pdf
 
-After completing the investigation, use the report functionality to organize the collected information.
+Search Query:
+site:example.com filetype:pdf
+```
 
-The report can be used for:
+### Step 5 — Generate a Report
 
-* Academic assignments
-* Cybersecurity labs
-* Authorized security assessments
-* Personal learning
+Use the **Report Generator** to organize the investigation.
 
----
+Reports can be exported as:
 
-# 🧪 Recommended Testing
+```text
+TXT
+HTML
+```
 
-For safe testing, use:
+Investigation data can also be saved and loaded using:
 
-* Your own website
-* A domain you control
-* Your own username
-* Intentionally provided test environments
-* Public educational/CTF targets where testing is explicitly permitted
-
-Do not test the application against random individuals or organizations without authorization.
+```text
+JSON
+```
 
 ---
 
-# 🛡️ Responsible Use
+## 📁 Project Structure
 
-OSINT information may appear to be publicly available, but **publicly accessible does not automatically mean ethically appropriate to collect, store, or distribute**.
+The project intentionally uses a **single Python file**:
 
-Users should:
+```text
+osint-investigator/
+│
+├── osint_investigator.py
+├── README.md
+├── LICENSE
+└── docs/
+    └── screenshot.png
+```
 
-* Respect privacy.
-* Follow applicable laws and regulations.
-* Follow the terms of websites and services.
-* Investigate only authorized targets.
-* Avoid collecting unnecessary personal information.
-* Avoid harassment or surveillance of individuals.
-* Avoid publishing sensitive findings.
-* Secure any investigation data that is collected.
+Keeping the application in one file makes the project easier for students to:
 
----
+* Read and understand
+* Run without complex setup
+* Study during a cybersecurity course
+* Demonstrate during an assessment
+* Modify and experiment with
 
-# ❌ What This Tool Should NOT Be Used For
-
-Do not use this application to:
-
-* Stalk individuals.
-* Harass or threaten people.
-* Dox individuals.
-* Obtain private information.
-* Bypass authentication.
-* Guess or steal passwords.
-* Circumvent CAPTCHAs or security controls.
-* Perform unauthorized vulnerability testing.
-* Exploit websites or systems.
-* Evade rate limits or access restrictions.
-* Conduct phishing or impersonation.
-* Facilitate fraud or other illegal activity.
-
-This project does not provide authorization to investigate any person, organization, website, or system.
+The code is organized internally into separate sections and functions for each OSINT module while remaining a single executable Python file.
 
 ---
 
-# ⚠️ Limitations
+## 🛡️ Limitations & Non-Goals
 
-OSINT results can change over time.
+OSINT Investigator is intentionally designed as a **passive and educational OSINT tool**.
 
-The application may also encounter:
+It does **not**:
 
-* Websites blocking automated requests
-* Network connectivity problems
-* DNS resolution failures
-* Rate limiting
-* Changed website structures
-* Search-engine restrictions
-* Incorrect or outdated public information
+* ❌ Bypass authentication
+* ❌ Bypass CAPTCHAs
+* ❌ Circumvent rate limits
+* ❌ Access private accounts or information
+* ❌ Steal or guess passwords
+* ❌ Exploit vulnerabilities
+* ❌ Perform vulnerability scanning
+* ❌ Perform unauthorized network scanning
+* ❌ Attempt privilege escalation
+* ❌ Evade security controls
+* ❌ Conduct automated aggressive scraping
 
-Therefore, results should be treated as **investigation leads rather than automatically verified facts**.
+The application primarily generates search queries and public profile URLs or makes normal public HTTP/DNS requests similar to ordinary browser activity.
 
----
+### Information Accuracy
 
-# 🎓 Educational Purpose
+Public OSINT data can be incomplete, outdated, misleading, or incorrectly attributed.
 
-This project was developed as part of cybersecurity learning to understand concepts including:
-
-* Open Source Intelligence
-* Google Dorking
-* Public information discovery
-* Username enumeration through public profiles
-* Domain information gathering
-* URL analysis
-* Evidence organization
-* Investigation reporting
-* Ethical cybersecurity practices
-
-The project demonstrates how multiple OSINT activities can be organized into a single Python-based graphical application.
+Results should therefore be treated as **investigation leads rather than automatically verified facts**. Important findings should be independently validated using reliable sources.
 
 ---
 
-# 🔮 Future Improvements
+## 🔮 Future Improvements
 
-Possible future versions could include:
+Potential future improvements include:
 
-* Additional OSINT modules
-* More configurable search operators
-* Better result organization
-* Investigation case management
-* Database-backed investigations
-* Improved report templates
-* Additional public-source integrations
+* Additional OSINT search sources
+* More configurable Google Dork categories
+* Improved domain information gathering
+* Certificate Transparency lookups
 * Passive DNS integrations
-* Certificate transparency information
-* More detailed domain analysis
-* Export to additional report formats
+* Additional report formats
+* Investigation case management
+* Improved evidence organization
+* Search-result bookmarking
+* More customizable dashboard themes
+* Additional educational OSINT modules
 
-Any future functionality should continue to follow applicable laws, service terms, authorization requirements, and responsible-security principles.
-
----
-
-# 👨‍💻 Project Information
-
-**Project:** OSINT Investigator
-
-**Type:** Cybersecurity / OSINT Educational Tool
-
-**Language:** Python
-
-**Interface:** Python GUI
-
-**Purpose:** Cybersecurity education and authorized OSINT research
+Future functionality will continue to follow the project's focus on **legal, authorized, and responsible security research**.
 
 ---
 
-# ⚖️ Disclaimer
+## 📄 License
 
-This software is provided for **educational and authorized security research purposes**.
+This project is licensed under the **MIT License**. See the [`LICENSE`](LICENSE) file for details.
 
-The developer does not encourage or support illegal activities, harassment, unauthorized surveillance, privacy violations, unauthorized access, exploitation, or any activity intended to harm another person or organization.
+### Educational Use
 
-The user is solely responsible for how the software is used.
+OSINT Investigator was built as part of a cybersecurity learning project.
 
-Before conducting an investigation, ensure that you have appropriate authorization and that your activities comply with applicable laws, regulations, and the terms of the services being accessed.
+It is provided for **educational purposes and authorized security research**. Users are responsible for ensuring that their use of the software complies with applicable laws, regulations, privacy requirements, and the terms of the services they access.
 
----
-
-## ⭐ Project Status
-
-**Current Version:** 1.0
-
-**Status:** Educational Project
-
-Built as part of cybersecurity learning and practical OSINT experimentation.
+**Use responsibly. 🔐**
