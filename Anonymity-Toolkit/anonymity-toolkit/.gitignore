@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/
+.vscode/
+# Generated reports and local app data must never be committed
+*.report.html
+*.report.txt
+exports/
+.anonymity_toolkit/
+*.log
+.report-*.tmp

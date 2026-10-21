@@ -1,0 +1,257 @@
+{
+  "scenarios": [
+    {
+      "id": "direct_connection",
+      "title": "1. Direct internet connection",
+      "summary": "Your device talks to the website through your home, work or mobile network with no VPN or proxy. The website sees your network's public IP address.",
+      "assumptions": [
+        "The website uses HTTPS, which is typical today.",
+        "Your device uses the DNS resolver provided by your network (the default).",
+        "No VPN or proxy is in use."
+      ],
+      "flows": [
+        {
+          "title": "Normal browsing over HTTPS",
+          "nodes": ["Your device", "ISP / network operator", "Website"],
+          "links": [
+            {"label": "HTTPS: page content is encrypted, but the destination is still visible", "protection": "partial"},
+            {"label": "Same HTTPS connection continues to the website", "protection": "encrypted"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "ISP / network operator",
+         "can_see": ["Your real public IP address", "Which IP addresses you connect to, and usually the domain names (from DNS lookups and the TLS server name)", "When you connect and roughly how much data you send"],
+         "cannot_see": ["Page content, form data and passwords inside HTTPS"]},
+        {"name": "Website",
+         "can_see": ["Your network's public IP address", "Your browser details, cookies and any account you are signed into", "What you do on that site"],
+         "cannot_see": ["Your device's private (local) IP address", "Which other sites you visit, except through trackers and cookies"]}
+      ],
+      "protects": ["HTTPS hides page content, passwords and form data from the network operator."],
+      "does_not_protect": ["Your IP address from the website.", "The names of the sites you visit from your ISP (metadata is usually visible).", "Tracking through cookies and accounts."],
+      "recommendations": ["Prefer HTTPS sites and heed browser warnings.", "Assume every site you visit can see your network's public IP address.", "Add tools such as a VPN only for specific risks you want to reduce."]
+    },
+    {
+      "id": "http_https_proxy",
+      "title": "2. HTTP/HTTPS proxy",
+      "summary": "Your application sends its traffic to a proxy server, which makes the request for you. The website usually sees the proxy's IP address instead of yours.",
+      "assumptions": [
+        "The proxy is configured in the application (for example a browser). Only traffic from that application uses it.",
+        "You trust the proxy operator.",
+        "The website uses HTTPS."
+      ],
+      "flows": [
+        {
+          "title": "HTTPS website through a proxy",
+          "nodes": ["Your device", "ISP / network operator", "Proxy server", "Website"],
+          "links": [
+            {"label": "Request to the proxy: with an http:// proxy the destination host is named in clear", "protection": "partial"},
+            {"label": "Same traffic arriving at the proxy", "protection": "partial"},
+            {"label": "HTTPS tunnel to the website: the proxy cannot read the content", "protection": "encrypted"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "ISP / network operator",
+         "can_see": ["That you connect to the proxy's address and port", "With an http:// proxy, the destination host name in the request"],
+         "cannot_see": ["HTTPS page content"]},
+        {"name": "Proxy provider",
+         "can_see": ["Your real IP address", "Which destinations you ask for, plus timing and data volume", "The full content of plain http:// sites"],
+         "cannot_see": ["HTTPS content, unless you installed a certificate the proxy controls"]},
+        {"name": "Website",
+         "can_see": ["The proxy's IP address", "Cookies and account details you send"],
+         "cannot_see": ["Your real IP address, unless the proxy forwards it in a header"]}
+      ],
+      "protects": ["Hides your IP address from the website for traffic that actually uses the proxy."],
+      "does_not_protect": ["Other applications that do not use the proxy.", "Your activity from the proxy operator.", "The content of plain http:// sites from the proxy operator.", "DNS lookups made outside the proxy (depends on the setup).", "Cookies, logins and fingerprinting."],
+      "recommendations": ["Only use proxies you own or are authorised to use. Free public proxies can read, change or log traffic.", "Prefer HTTPS sites.", "Remember that a successful Proxy Tester result shows only that one request used the proxy."]
+    },
+    {
+      "id": "vpn_tunnel",
+      "title": "3. VPN tunnel",
+      "summary": "Your device encrypts traffic into a tunnel to a VPN server, which then connects to the website. The website sees the VPN server's IP address.",
+      "assumptions": [
+        "The VPN is connected and carries this traffic (no split tunnelling for it).",
+        "DNS lookups go through the tunnel.",
+        "You trust the VPN provider."
+      ],
+      "flows": [
+        {
+          "title": "Browsing through a VPN",
+          "nodes": ["Your device", "ISP / network operator", "VPN provider server", "Website"],
+          "links": [
+            {"label": "Encrypted VPN tunnel: the ISP sees only that you talk to the VPN server", "protection": "tunnel"},
+            {"label": "Same tunnel, travelling across the internet", "protection": "tunnel"},
+            {"label": "VPN server connects to the website: HTTPS content stays encrypted, plain HTTP would not", "protection": "encrypted"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "ISP / network operator",
+         "can_see": ["The VPN server's IP address", "When you are connected and how much data you send"],
+         "cannot_see": ["The sites you visit", "Content", "DNS lookups carried inside the tunnel"]},
+        {"name": "VPN provider",
+         "can_see": ["Your real IP address", "Which sites you connect to, plus timing and data volume"],
+         "cannot_see": ["HTTPS page content"]},
+        {"name": "Website",
+         "can_see": ["The VPN server's IP address", "Cookies, accounts and browser traits"],
+         "cannot_see": ["Your real IP address"]}
+      ],
+      "protects": ["Hides your browsing destinations from your local network and ISP.", "Hides your real IP address from websites.", "Reduces local snooping on untrusted networks."],
+      "does_not_protect": ["Your activity from the VPN provider itself.", "Cookies, logins and browser fingerprinting.", "Traffic that bypasses the tunnel (split tunnelling or leaks).", "Malware and phishing."],
+      "recommendations": ["Choose a provider whose privacy claims you have reviewed.", "Enable the kill switch.", "Check DNS and WebRTC exposure using the Privacy Checklist.", "Do not treat a changed IP address as proof of anonymity."]
+    },
+    {
+      "id": "public_wifi_https",
+      "title": "4. Public Wi-Fi with HTTPS",
+      "summary": "You use open cafe or airport Wi-Fi. HTTPS protects page content, but the Wi-Fi operator and other people on the network can still learn some metadata.",
+      "assumptions": [
+        "No VPN is in use.",
+        "Websites use HTTPS with valid certificates.",
+        "The Wi-Fi is run by someone you do not know."
+      ],
+      "flows": [
+        {
+          "title": "HTTPS over untrusted Wi-Fi",
+          "nodes": ["Your device", "Public Wi-Fi operator", "Operator's ISP", "Website"],
+          "links": [
+            {"label": "Wi-Fi link: on open Wi-Fi nearby devices may capture metadata; HTTPS content stays encrypted", "protection": "partial"},
+            {"label": "Operator forwards your traffic to its ISP", "protection": "partial"},
+            {"label": "HTTPS connection to the website", "protection": "encrypted"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "Wi-Fi operator",
+         "can_see": ["That your device is on the network", "Domain names and IP addresses you connect to, timing and data volume"],
+         "cannot_see": ["HTTPS content and passwords, when certificates are valid"]},
+        {"name": "Other people on the same Wi-Fi",
+         "can_see": ["That your device is on the network", "On open Wi-Fi, some traffic metadata"],
+         "cannot_see": ["HTTPS content"]},
+        {"name": "Website",
+         "can_see": ["The Wi-Fi network's public IP address", "Cookies and accounts"],
+         "cannot_see": ["Your device on the local network"]}
+      ],
+      "protects": ["HTTPS protects passwords and page content from the operator and other users.", "Certificate warnings help you notice tampering."],
+      "does_not_protect": ["Which sites you visit (metadata).", "Your device's exposure on the local network, such as file sharing.", "Anything on non-HTTPS sites, or after clicking through a certificate warning."],
+      "recommendations": ["Never click through certificate warnings.", "For sensitive tasks use a VPN or your phone's hotspot instead.", "Turn off file sharing and keep your system updated.", "Sign in only on HTTPS sites."]
+    },
+    {
+      "id": "vpn_failure_kill_switch",
+      "title": "5. VPN failure and kill switch",
+      "summary": "If a VPN connection drops, the device may quietly go back to the normal connection and expose your real address. A kill switch blocks traffic until the VPN returns.",
+      "assumptions": [
+        "The VPN connection drops (server problem, network change, sleep and wake).",
+        "Without a kill switch the system may use the normal route.",
+        "Real behaviour varies by VPN app and operating system."
+      ],
+      "flows": [
+        {
+          "title": "Kill switch OFF: tunnel drops",
+          "nodes": ["Your device", "ISP / network operator", "Website"],
+          "links": [
+            {"label": "Tunnel DOWN: traffic falls back to the normal connection", "protection": "failed"},
+            {"label": "Website sees your real network address; HTTPS content is still encrypted", "protection": "partial"}
+          ]
+        },
+        {
+          "title": "Kill switch ON: tunnel drops",
+          "nodes": ["Your device", "Network (traffic blocked)"],
+          "links": [
+            {"label": "Tunnel DOWN: traffic is blocked until the VPN reconnects", "protection": "failed"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "ISP / network operator",
+         "can_see": ["Kill switch OFF: your normal destinations again while the VPN is down", "Kill switch ON: mostly failed or blocked connection attempts"],
+         "cannot_see": ["HTTPS content in either case"]},
+        {"name": "Website",
+         "can_see": ["Kill switch OFF: your real network address", "Kill switch ON: nothing, because no request is made"],
+         "cannot_see": ["Anything about the VPN drop itself"]},
+        {"name": "VPN provider",
+         "can_see": ["That the tunnel disconnected"],
+         "cannot_see": ["Traffic sent while the tunnel is down"]}
+      ],
+      "protects": ["A kill switch prevents accidental exposure while the VPN is down."],
+      "does_not_protect": ["Leaks that happen while the VPN says it is connected, such as DNS or WebRTC.", "Apps that bypass the VPN by design (split tunnelling).", "Differences between providers: some block only selected apps."],
+      "recommendations": ["Find and enable the kill switch or network lock in your VPN app.", "Read how your provider's kill switch behaves on reconnect and after sleep.", "Record what you checked on the Privacy Checklist instead of assuming."]
+    },
+    {
+      "id": "dns_privacy",
+      "title": "6. DNS privacy and potential exposure",
+      "summary": "Before connecting, your device asks a DNS resolver to turn a website name into an IP address. Whoever runs that resolver can see the names you look up.",
+      "assumptions": [
+        "DNS goes to the resolver set by your network or application.",
+        "Plain DNS is unencrypted. DNS over HTTPS or TLS encrypts it between you and the resolver.",
+        "A VPN may or may not carry DNS inside its tunnel."
+      ],
+      "flows": [
+        {
+          "title": "Plain DNS lookup",
+          "nodes": ["Your device", "ISP / network operator", "DNS resolver"],
+          "links": [
+            {"label": "Plain DNS query: the names are readable along the path", "protection": "plain"},
+            {"label": "Query reaches the resolver (often the ISP's own)", "protection": "plain"}
+          ]
+        },
+        {
+          "title": "Encrypted DNS or DNS carried by a VPN",
+          "nodes": ["Your device", "ISP / network operator", "DNS resolver"],
+          "links": [
+            {"label": "Encrypted DNS or VPN tunnel: the path cannot read the names", "protection": "tunnel"},
+            {"label": "The resolver still sees the names you ask for", "protection": "partial"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "ISP / network operator",
+         "can_see": ["Plain DNS: every name you look up", "Encrypted DNS: that you talk to a resolver, not the names"],
+         "cannot_see": ["Names inside encrypted DNS or a VPN tunnel"]},
+        {"name": "DNS resolver operator",
+         "can_see": ["The names you look up", "The address the queries come from (your IP, or the VPN's)"],
+         "cannot_see": ["What you do on the sites afterwards"]},
+        {"name": "Website",
+         "can_see": ["Nothing about your DNS lookups"],
+         "cannot_see": ["Which resolver you use"]}
+      ],
+      "protects": ["Encrypted DNS stops the network path from reading your lookups.", "VPN-carried DNS sends lookups through the tunnel."],
+      "does_not_protect": ["The resolver operator still sees the names.", "Encrypted DNS does not hide destination IP addresses from the network.", "A DNS leak means lookups going outside the VPN tunnel to a resolver you did not intend."],
+      "recommendations": ["Run a DNS leak test while connected (see the Privacy Checklist).", "Choose a resolver you trust.", "Check the DNS setting in your VPN app."]
+    },
+    {
+      "id": "tracking_cookies_fingerprinting",
+      "title": "7. Browser tracking: cookies and fingerprinting",
+      "summary": "Websites and third-party trackers can recognise your browser without knowing your IP address. Cookies store an ID, and fingerprinting combines browser and device traits.",
+      "assumptions": [
+        "A normal browser with cookies enabled, visiting sites that embed third-party trackers.",
+        "A VPN may be on. It changes your IP address, not your browser traits.",
+        "You may be signed into accounts."
+      ],
+      "flows": [
+        {
+          "title": "How a tracker recognises you across sites",
+          "nodes": ["Your browser", "Website you visit", "Third-party tracker"],
+          "links": [
+            {"label": "A cookie ID and browser traits are sent with every request", "protection": "info"},
+            {"label": "An embedded script or pixel reports the visit to the tracker", "protection": "info"}
+          ]
+        }
+      ],
+      "parties": [
+        {"name": "Website",
+         "can_see": ["Cookies and any account you are signed into", "Browser and device traits such as screen size, language and fonts", "Your IP address"],
+         "cannot_see": ["Your activity on unrelated sites, unless a tracker links it"]},
+        {"name": "Third-party tracker",
+         "can_see": ["The same ID across all sites that embed it", "Which pages you visited and where you came from"],
+         "cannot_see": ["Your passwords inside HTTPS"]},
+        {"name": "VPN provider",
+         "can_see": ["Which sites you connect to"],
+         "cannot_see": ["Your cookies and page content inside HTTPS", "It does not change your browser fingerprint"]}
+      ],
+      "protects": ["Tracking protection, blocking third-party cookies and separate browser profiles reduce cross-site tracking.", "Clearing cookies resets cookie-based IDs."],
+      "does_not_protect": ["A VPN or proxy: they change the IP address, not cookies or fingerprint.", "Being signed in: accounts identify you directly.", "Unusual browser settings can make you more unique, so perfect fingerprint resistance does not exist."],
+      "recommendations": ["Use your browser's tracking protection and block third-party cookies.", "Sign out or use separate profiles for activities you want kept apart.", "Do not expect a VPN alone to stop tracking."]
+    }
+  ]
+}

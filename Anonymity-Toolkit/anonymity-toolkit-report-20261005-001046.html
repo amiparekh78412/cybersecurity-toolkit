@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Anonymity Toolkit report</title><style>
+:root{color-scheme:light dark;--bg:#fff;--fg:#1f2328;--card:#f6f8fa;--bd:#d0d7de}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--card:#161b22;--bd:#30363d}}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,Segoe UI,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.5}
+section{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0}
+h2{font-size:1.1rem;margin:.2rem 0 .6rem}
+.badge{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:.5rem;color:#fff;vertical-align:middle;background:#59636e}
+.OBSERVED{background:#1a7f37}.SIMULATED{background:#8250df}.UR{background:#9a6700}
+ul{padding-left:1.2rem;margin:0} li{margin:.25rem 0;overflow-wrap:anywhere}
+</style></head><body>
+<h1>Anonymity Toolkit report</h1>
+<section><h2>Report details</h2><ul>
+<li>Application: Anonymity Toolkit 1.0.0</li>
+<li>Report generated: 2026-10-04T18:40:46.420746+00:00</li>
+<li>Operating mode when generated: Online</li>
+</ul></section>
+<section><h2>How to read this report</h2><ul>
+<li>[OBSERVED] = reported by a lookup service or test request made by this tool, at the time shown.</li>
+<li>[USER-REPORTED] = a checklist item you marked Reviewed. This tool did not verify it.</li>
+<li>[UNVERIFIED] = a checklist item not reviewed or marked Needs review. No evidence was checked.</li>
+<li>[SIMULATED] = educational illustration, never a measurement.</li>
+</ul></section>
+<section><h2>IP observations<span class="badge OBSERVED">OBSERVED</span></h2><ul>
+<li>[OBSERVED] 49.36.126.85 (IPv4) | 2026-10-04T18:05:26+00:00 | source: api.ipify.org | lookup time: 350.2 ms | #1</li>
+<li>[OBSERVED] 170.64.220.164 (IPv4) | 2026-10-04T18:30:09+00:00 | source: api.ipify.org | lookup time: 2154.7 ms | #2</li>
+<li>[OBSERVED] 170.64.220.164 (IPv4) | 2026-10-04T18:31:26+00:00 | source: api.ipify.org | lookup time: 1445.8 ms | #3</li>
+<li>[OBSERVED] 49.36.126.85 (IPv4) | 2026-10-04T18:31:42+00:00 | source: api.ipify.org | lookup time: 313.2 ms | #4</li>
+<li>[OBSERVED] 165.22.52.186 (IPv4) | 2026-10-04T18:36:39+00:00 | source: api.ipify.org | lookup time: 834.2 ms | #5</li>
+<li>[OBSERVED] 49.36.126.85 (IPv4) | 2026-10-04T18:36:47+00:00 | source: api.ipify.org | lookup time: 302.1 ms | #6</li>
+<li>[OBSERVED] 49.36.126.85 (IPv4) | 2026-10-04T18:36:51+00:00 | source: api.ipify.org | lookup time: 273.1 ms | #7</li>
+<li>[OBSERVED] 49.36.126.85 (IPv4) | 2026-10-04T18:37:34+00:00 | source: api.ipify.org | lookup time: 290.2 ms | #8</li>
+<li>[OBSERVED] 167.99.177.98 (IPv4) | 2026-10-04T18:38:56+00:00 | source: api.ipify.org | lookup time: 1548.6 ms | #9</li>
+</ul></section>
+<section><h2>IP comparison<span class="badge OBSERVED">OBSERVED</span></h2><ul>
+<li>OBSERVED ADDRESS CHANGED</li>
+<li>Earlier: 49.36.126.85 at 2026-10-04T18:37:34+00:00 (source: api.ipify.org)</li>
+<li>Later: 167.99.177.98 at 2026-10-04T18:38:56+00:00 (source: api.ipify.org)</li>
+<li>Time between: 1 min 22 s</li>
+<li>The observed egress address changed from 49.36.126.85 to 167.99.177.98. That is consistent with traffic leaving through a different network (for example a VPN or proxy), but it does not prove the VPN is configured correctly, that all of your traffic uses it, or that you are anonymous.</li>
+<li>Limitation: Each lookup shows only what one external server saw at one moment.</li>
+<li>Limitation: A VPN or proxy can be active without changing this address (for example split tunnelling), and an address can change for unrelated reasons (your ISP reassigning it, or you switching networks).</li>
+<li>Limitation: This comparison cannot see DNS requests, WebRTC, IPv6 routes, or traffic from other applications.</li>
+</ul></section>
+<section><h2>Proxy tests (credentials are never recorded)<span class="badge OBSERVED">OBSERVED</span></h2><ul>
+<li>[OBSERVED] http://127.0.0.1:8899 | SUCCESS (ok) | HTTP status: 200 | elapsed: 1867.0 ms | egress IP: 170.64.220.164 | 2026-10-04T18:30:27+00:00 | A request through the proxy succeeded.</li>
+<li>[OBSERVED] http://127.0.0.9:8901 | FAILED (proxy_connection) | HTTP status: n/a | elapsed: 2045.5 ms | egress IP: n/a | 2026-10-04T18:31:17+00:00 | Could not connect through the proxy. Check the address, port and that the proxy is running.</li>
+<li>[OBSERVED] http://127.0.0.1:8999 | FAILED (proxy_connection) | HTTP status: n/a | elapsed: 2053.3 ms | egress IP: n/a | 2026-10-04T18:37:15+00:00 | Could not connect through the proxy. Check the address, port and that the proxy is running.</li>
+<li>[OBSERVED] http://127.0.0.1:8900 | SUCCESS (ok) | HTTP status: 200 | elapsed: 387.9 ms | egress IP: 49.36.126.85 | 2026-10-04T18:37:29+00:00 | A request through the proxy succeeded.</li>
+</ul></section>
+<section><h2>Privacy checklist<span class="badge UR">USER-REPORTED / UNVERIFIED</span></h2><ul>
+<li>[USER-REPORTED] VPN configured or reported active: marked Reviewed by you (not verified by this tool)</li>
+<li>[UNVERIFIED] VPN kill-switch setting checked: Not verified. Next step: Find the option in your VPN app and enable it if available; read what the provider says it blocks.</li>
+<li>[UNVERIFIED] DNS configuration and exposure reviewed: Not verified. Next step: Run a DNS leak test while connected and check that the listed resolvers belong to your VPN provider or a resolver you chose.</li>
+<li>[UNVERIFIED] Browser WebRTC exposure reviewed: Not verified. Next step: Test in your main browser while the VPN is on; if your own address appears, follow your browser&#x27;s or VPN provider&#x27;s guidance to restrict WebRTC.</li>
+<li>[UNVERIFIED] Browser tracking protections considered: Not verified. Next step: Review your browser&#x27;s privacy settings, consider blocking third-party cookies, and keep the browser updated.</li>
+<li>[UNVERIFIED] Account-based identification and cookies understood: Not verified. Next step: Sign out of accounts when privacy matters, use separate browser profiles, and clear cookies when appropriate.</li>
+<li>[UNVERIFIED] Sensitive information excluded from saved reports: Not verified. Next step: Open a report before sending it, and clear saved history you no longer need from the Dashboard.</li>
+</ul></section>
+<section><h2>Recommendations</h2><ul>
+<li>Confirm in your VPN app that the tunnel is connected and note which server is selected.</li>
+<li>Repeat the lookup a few minutes later to check the result is stable.</li>
+<li>Review DNS and WebRTC exposure using the Privacy Checklist page.</li>
+<li>Check that the kill-switch setting is enabled in your VPN app.</li>
+<li>Find the option in your VPN app and enable it if available; read what the provider says it blocks.</li>
+<li>Run a DNS leak test while connected and check that the listed resolvers belong to your VPN provider or a resolver you chose.</li>
+<li>Test in your main browser while the VPN is on; if your own address appears, follow your browser&#x27;s or VPN provider&#x27;s guidance to restrict WebRTC.</li>
+<li>Review your browser&#x27;s privacy settings, consider blocking third-party cookies, and keep the browser updated.</li>
+<li>Sign out of accounts when privacy matters, use separate browser profiles, and clear cookies when appropriate.</li>
+<li>Open a report before sending it, and clear saved history you no longer need from the Dashboard.</li>
+<li>Treat saved history and reports as personal data: read a report before sharing it, or redact IP addresses.</li>
+<li>Do not rely on a changed IP address alone as evidence of anonymity.</li>
+</ul></section>
+<section><h2>Limitations and disclaimer</h2><ul>
+<li>Observed values are what an external service reported at one moment, not a full picture of your network.</li>
+<li>An unchanged IP address does not prove a VPN is inactive, and a changed one does not prove it is configured correctly.</li>
+<li>DNS leaks, WebRTC leaks, IPv6 leaks, kill-switch behaviour and operating-system settings are not tested by this tool.</li>
+<li>Privacy checklist answers are what you reported. This tool did not verify them.</li>
+<li>SIMULATED content is an educational illustration, not a measurement.</li>
+<li>This report is for education. This tool cannot guarantee anonymity, verify every aspect of VPN routing or detect every privacy leak. A changed IP address does not prove anonymity.</li>
+</ul></section>
+</body></html>

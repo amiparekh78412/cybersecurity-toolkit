@@ -1,0 +1,64 @@
+ANONYMITY TOOLKIT REPORT
+========================
+
+REPORT DETAILS
+--------------
+- Application: Anonymity Toolkit 1.0.0
+- Report generated: 2026-10-04T18:40:18.467615+00:00
+- Operating mode when generated: Online
+- IP addresses are redacted; the same [IP-n] token always means the same address.
+
+HOW TO READ THIS REPORT
+-----------------------
+[OBSERVED] = reported by a lookup service or test request made by this tool, at the time shown.
+[USER-REPORTED] = a checklist item you marked Reviewed. This tool did not verify it.
+[UNVERIFIED] = a checklist item not reviewed or marked Needs review. No evidence was checked.
+[SIMULATED] = educational illustration, never a measurement.
+
+IP OBSERVATIONS  [OBSERVED]
+---------------------------
+[OBSERVED] [IP-1] (IPv4) | 2026-10-04T18:05:26+00:00 | source: api.ipify.org | lookup time: 350.2 ms | #1
+[OBSERVED] [IP-2] (IPv4) | 2026-10-04T18:30:09+00:00 | source: api.ipify.org | lookup time: 2154.7 ms | #2
+[OBSERVED] [IP-2] (IPv4) | 2026-10-04T18:31:26+00:00 | source: api.ipify.org | lookup time: 1445.8 ms | #3
+[OBSERVED] [IP-1] (IPv4) | 2026-10-04T18:31:42+00:00 | source: api.ipify.org | lookup time: 313.2 ms | #4
+[OBSERVED] [IP-3] (IPv4) | 2026-10-04T18:36:39+00:00 | source: api.ipify.org | lookup time: 834.2 ms | #5
+[OBSERVED] [IP-1] (IPv4) | 2026-10-04T18:36:47+00:00 | source: api.ipify.org | lookup time: 302.1 ms | #6
+[OBSERVED] [IP-1] (IPv4) | 2026-10-04T18:36:51+00:00 | source: api.ipify.org | lookup time: 273.1 ms | #7
+[OBSERVED] [IP-1] (IPv4) | 2026-10-04T18:37:34+00:00 | source: api.ipify.org | lookup time: 290.2 ms | #8
+[OBSERVED] [IP-4] (IPv4) | 2026-10-04T18:38:56+00:00 | source: api.ipify.org | lookup time: 1548.6 ms | #9
+
+IP COMPARISON  [OBSERVED]
+-------------------------
+- OBSERVED ADDRESS CHANGED
+- Earlier: [IP-1] at 2026-10-04T18:37:34+00:00 (source: api.ipify.org)
+- Later: [IP-4] at 2026-10-04T18:38:56+00:00 (source: api.ipify.org)
+- Time between: 1 min 22 s
+- The observed egress address changed from [IP-1] to [IP-4]. That is consistent with traffic leaving through a different network (for example a VPN or proxy), but it does not prove the VPN is configured correctly, that all of your traffic uses it, or that you are anonymous.
+- Limitation: Each lookup shows only what one external server saw at one moment.
+- Limitation: A VPN or proxy can be active without changing this address (for example split tunnelling), and an address can change for unrelated reasons (your ISP reassigning it, or you switching networks).
+- Limitation: This comparison cannot see DNS requests, WebRTC, IPv6 routes, or traffic from other applications.
+
+PROXY TESTS (CREDENTIALS ARE NEVER RECORDED)  [OBSERVED]
+--------------------------------------------------------
+[OBSERVED] http://127.0.0.1:8899 | SUCCESS (ok) | HTTP status: 200 | elapsed: 1867.0 ms | egress IP: [IP-2] | 2026-10-04T18:30:27+00:00 | A request through the proxy succeeded.
+[OBSERVED] http://127.0.0.9:8901 | FAILED (proxy_connection) | HTTP status: n/a | elapsed: 2045.5 ms | egress IP: n/a | 2026-10-04T18:31:17+00:00 | Could not connect through the proxy. Check the address, port and that the proxy is running.
+[OBSERVED] http://127.0.0.1:8999 | FAILED (proxy_connection) | HTTP status: n/a | elapsed: 2053.3 ms | egress IP: n/a | 2026-10-04T18:37:15+00:00 | Could not connect through the proxy. Check the address, port and that the proxy is running.
+[OBSERVED] http://127.0.0.1:8900 | SUCCESS (ok) | HTTP status: 200 | elapsed: 387.9 ms | egress IP: [IP-1] | 2026-10-04T18:37:29+00:00 | A request through the proxy succeeded.
+
+RECOMMENDATIONS
+---------------
+- Confirm in your VPN app that the tunnel is connected and note which server is selected.
+- Repeat the lookup a few minutes later to check the result is stable.
+- Review DNS and WebRTC exposure using the Privacy Checklist page.
+- Check that the kill-switch setting is enabled in your VPN app.
+- Treat saved history and reports as personal data: read a report before sharing it, or redact IP addresses.
+- Do not rely on a changed IP address alone as evidence of anonymity.
+
+LIMITATIONS AND DISCLAIMER
+--------------------------
+- Observed values are what an external service reported at one moment, not a full picture of your network.
+- An unchanged IP address does not prove a VPN is inactive, and a changed one does not prove it is configured correctly.
+- DNS leaks, WebRTC leaks, IPv6 leaks, kill-switch behaviour and operating-system settings are not tested by this tool.
+- Privacy checklist answers are what you reported. This tool did not verify them.
+- SIMULATED content is an educational illustration, not a measurement.
+- This report is for education. This tool cannot guarantee anonymity, verify every aspect of VPN routing or detect every privacy leak. A changed IP address does not prove anonymity.
